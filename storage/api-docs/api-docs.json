@@ -1,0 +1,110 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel OpenApi Learing Documentation",
+        "description": "L5 Swagger OpenApi learing project",
+        "contact": {
+            "name": "Abu Shahadat Md. Sayem",
+            "url": "https://www.amiprobashi.com/",
+            "email": "sayem1413@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/v1"
+        },
+        {
+            "url": "http://dev-host.com"
+        }
+    ],
+    "paths": {
+        "/items": {
+            "get": {
+                "tags": [
+                    "Items"
+                ],
+                "summary": "Get list of Items",
+                "description": "Returns list of items",
+                "operationId": "get list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Items"
+                ],
+                "summary": "Store new item",
+                "description": "Returns item data",
+                "operationId": "Add new",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Item title",
+                                        "required": [
+                                            "title"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Item title",
+                                        "required": [
+                                            "title"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "title": "test title"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Items",
+            "description": "API Endpoints of Items CRUD"
+        }
+    ]
+}
