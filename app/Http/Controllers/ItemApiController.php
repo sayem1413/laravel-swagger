@@ -95,34 +95,135 @@ class ItemApiController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/items/{id}",
+     *      operationId="get item by id",
+     *      tags={"Items"},
+     *      summary="Get Item information",
+     *      description="Returns item data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Item id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      )
+     * )
      */
-    public function show(string $id)
+    public function show(Item $item)
     {
-        //
+        return response()->json($item);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @OA\Put(
+     *      path="/items/{id}",
+     *      operationId="update Item",
+     *      tags={"Items"},
+     *      summary="Update existing item",
+     *      description="Returns updated item data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Item id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                 required={"title"},
+     *                 @OA\Property(
+     *                     property="title", 
+     *                     type="string",
+     *                     description="Item title",
+     *                     required={"title"}
+     *                 ),
+     *              ),
+     *          ),
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                 required={"title"},
+     *                 example={"title": "test title"},
+     *                 @OA\Property(
+     *                     property="title", 
+     *                     type="string",
+     *                     description="Item title",
+     *                     required={"title"}
+     *                 ),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable entity"
+     *      )
+     * )
      */
-    public function edit(string $id)
+
+    public function update(ItemRequest $request, Item $item)
     {
-        //
+        return response()->json( $item->update($request->all()) );
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Delete(
+     *      path="/items/{id}",
+     *      operationId="delete item",
+     *      tags={"Items"},
+     *      summary="Delete existing item",
+     *      description="Deletes a record and returns no content",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Item id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
-    public function update(Request $request, string $id)
+    public function destroy(Item $item)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($item->delete());
     }
 }
