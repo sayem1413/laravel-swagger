@@ -21,10 +21,12 @@ use Illuminate\Routing\Controller as BaseController;
      *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_LOCAL_HOST,
+     *      description="local host"
      * )
      * 
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_DEV_HOST,
+     *      description="local IP"
      * )
      */
 
